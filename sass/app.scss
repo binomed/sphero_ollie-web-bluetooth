@@ -1,0 +1,110 @@
+html, body{
+	margin:0;
+	padding:0;
+	min-height:100%;
+	min-width:100%;
+    background: #ddd;
+    color:#fff;
+	//display:flex;
+	//flex-direction:column;
+}
+
+canvas{
+	margin:auto;
+}
+
+.mdl-layout__header-row{
+    img{
+        max-height: 90%;
+        margin-right: 20px;
+        left: -50px;
+        position:relative;
+    }
+}
+
+.mdl-layout .mdl-layout__content{
+    display: flex;
+    
+    .page-content{
+        display: flex;
+        flex:1; 
+        justify-content: center;
+        flex-direction: column;
+                
+                
+                
+        #noBluetooth, #stepConnect/*, #stepControl*/{
+            display: flex;
+            align-self: center;
+        }
+    }
+    
+    #stepControl{
+        display: flex;
+        flex:1;
+        flex-direction: column; 
+          
+        .row{
+            display: flex;
+            flex-direction: row;   
+            margin: 20px;
+        }
+        
+        /*.mdl-tabs__panel{
+            display: flex;
+        }*/
+        
+        .panel-flex{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .mdl-tabs__tab-bar{
+            margin-bottom: 20px;
+        }
+        
+        .part-joystick{
+            display: flex;
+            justify-content: center;
+        }
+        
+        h2{
+            margin:auto;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+    
+    
+}
+
+.demo-card-wide.mdl-card {
+  width: 512px;
+}
+#noBluetooth .demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../assets/images/ollie_crash.jpg') center / cover;
+}
+
+#stepConnect  .demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../assets/images/ollie_connect.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__menu {
+  color: #000;
+}
+
+.flex20{
+    flex:0.2;
+}
+.flex60{
+    flex:0.6;
+}
+.flex40{
+    flex:0.4;
+}
+

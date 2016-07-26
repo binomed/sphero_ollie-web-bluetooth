@@ -1,0 +1,37 @@
+{
+    "name": "Sphero Ollie WebBluetooth",
+    "short_name": "Ollie",
+    "icons": [{
+            "src": "./assets/images/logo_128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        }, {
+            "src": "./assets/images/logo_152.png",
+            "type": "image/png",
+            "sizes": "152x152"
+        },
+
+        {
+            "src": "./assets/images/logo_144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        }, {
+            "src": "./assets/images/logo_192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }, {
+            "src": "./assets/images/logo_256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        }, {
+            "src": "./assets/images/logo_512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ddd",
+    "theme_color": "#ddd"
+}
