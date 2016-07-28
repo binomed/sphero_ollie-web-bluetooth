@@ -36,8 +36,8 @@
                         
                         let Joystick = require('./components/joystick.js');		
                         new Joystick('joystick', (data) => {
-                            console.log(data);		
-                             // TODO		
+                           //console.log(data.angle);
+                           ollie.processMotor(data.angle, data.power);
                         });		
                         let partJoystick = document.querySelector('.part-joystick');
                         let partBtn = document.querySelector('.part-button');

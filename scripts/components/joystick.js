@@ -9,11 +9,11 @@ class Joystick {
                 top: '50%'
             },
             size: 200,
-            color: '#3f51b5'
+            color: '#f44336'
         });
         this.callback = callback;
 
-        function LogF(evt, data){
+        /*function LogF(evt, data){
             console.log(evt,data);
         }
         this.joystick.on('move', LogF);
@@ -24,45 +24,26 @@ class Joystick {
         this.joystick.on('hidden', LogF);
         this.joystick.on('destroy', LogF);
         this.joystick.on('pressure', LogF);
-        this.joystick.on('end', LogF);
+        this.joystick.on('end', LogF);*/
 
-        //this.joystick.on('move', this._move.bind(this));
-        //this.joystick.on('end', this._end.bind(this));
+        this.joystick.on('move', this._move.bind(this));
+        this.joystick.on('end', this._end.bind(this));
         this.lastPower = 0;
+        this.lastAngle = 0;
     }
 
     _move(evt, data) {        
-        if (data.direction) {
-            let power = Math.round((data.distance / 100) * 250);
-            if (power != this.lastPower) {
-                this.lastPower = power;                
-                switch (data.direction.angle) {
-                    case 'up':
-                        this.callback({
-                            M1: -power,
-                            M2: power
-                        });
-                        break;
-                    case 'down':
-                        this.callback({
-                            M1: power,
-                            M2: -power
-                        });
-                        break;
-                    case 'left':
-                        this.callback({
-                            M1: power,
-                            M2: power
-                        });
-                        break;
-                    case 'right':
-                        this.callback({
-                            M1: -power,
-                            M2: -power
-                        });
-                        break;
-
-                }
+        if (data.angle) {            
+            let power = Math.round((data.distance / 100) * 100);
+            let angle = data.angle.degree;
+            if (power != this.lastPower
+            || angle != this.lastAngle) {
+                this.lastPower = power;   
+                this.lastAngle = angle;
+                this.callback({
+                    angle : Math.abs(360 - ((this.lastAngle + 270) % 360)),
+                    power : this.lastPower
+                });
             }
         }
         
@@ -70,9 +51,10 @@ class Joystick {
     }
 
     _end(evt, data) {
+        this.lastPower = 0;
         this.callback({
-            M1: 0,
-            M2: 0
+            angle: this.lastAngle,
+            power: 0
         });
     }
 

@@ -268,7 +268,7 @@ Super.prototype.bindEvt = function (el, type) {
     self._domHandlers_ = self._domHandlers_ || {};
 
     self._domHandlers_[type] = function () {
-        console.log(el, type);
+        console.log("domHandlers",el, type);
         if (typeof self['on' + type] === 'function') {
             self['on' + type].apply(self, arguments);
         } else {
@@ -995,7 +995,7 @@ Collection.prototype.getOrCreate = function (identifier, position) {
 };
 
 Collection.prototype.processOnMove = function (evt) {
-    evt.preventDefault();
+    
     var self = this;
     var opts = self.options;
     var identifier = self.manager.getIdentifier(evt);
