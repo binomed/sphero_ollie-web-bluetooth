@@ -89,8 +89,33 @@ class Ollie {
                     this.config.wakeUpCPUCharateristic(),
                     new Uint8Array([0x01]))
             })
+            .then(()=>{                
+                console.log('Wake CPU write done.');             
+                //Set rgbLed to 0
+                let color = 0x01;
+                color &= 0xFF;
+                return this._sendCommand(0x02, 0x20, new Uint8Array([color]))
+            })
+            .then(() => {
+                console.log('Rgb Led set to 0');
+                // set BackLed to 127
+                return this._sendCommand(0x02, 0x21, new Uint8Array([127]));
+            })
             .then(()=>{
-                console.log('Wake CPU write done.');
+                console.log('Back Led set to 127');
+                // set stabilisation to 0
+                let flag = 0;
+                flag &= 0x01;
+                return this._sendCommand(0x02, 0x02, new Uint8Array([flag]));
+            })
+            .then(()=>{
+                console.log('Stabilisation set to 0');
+                // Set heading to 0
+                let heading = 0;
+                return this._sendCommand(0x02, 0x01, new Uint8Array([heading >> 8, heading & 0xFF]));
+            })
+            .then(()=>{
+                console.log('Heading set to 0, device is ready !');
             })
             .catch(error => {
                 console.error(error);
@@ -113,8 +138,9 @@ class Ollie {
         // Roll command data: speed, heading (MSB), heading (LSB), state
         let data = new Uint8Array([power, heading >> 8, heading & 0xFF, 1]);
 
-        this._sendCommand(did, cid, data).then(() => {
+        return this._sendCommand(did, cid, data).then(() => {
             this.busy = false;
+            return Promise.resolve();
         })
         .catch((error)=>{
             console.error(error);
@@ -136,8 +162,10 @@ class Ollie {
         // Color command data: red, green, blue, flag
         let data = new Uint8Array([red, green, blue, 0]);
 
-        this._sendCommand(did, cid, data).then(() => {
+        return this._sendCommand(did, cid, data).then(() => {
+            console.log("color set ! ");
             this.busy = false;
+            return Promise.resolve();
         })
         .catch((error)=>{
             console.error(error);
@@ -161,29 +189,33 @@ class Ollie {
         
         let data = new Uint8Array([lmode, lpower, rmode, rpower]);
 
-        this._sendCommand(did, cid, data).then(() => {
-            this.busy = false;
-            console.log("send command")
+        return this._sendCommand(did, cid, data).then(() => {
+            return new Promise(function(resolve, reject){
+                setTimeout(()=> {
+                    let lmode = this.Motors.off & 0x07;
+                    let lpower = 200 & 0xFF;
+                    let rmode = this.Motors.off & 0x07;
+                    let rpower = 200 & 0xFF;
+                    
+                    let data = new Uint8Array([lmode, lpower, rmode, rpower]);
+
+                    this._sendCommand(did, cid, data).then(() => {
+                        this.busy = false;
+                        resolve();
+                    })
+                    .catch((error)=>{
+                        console.error(error);
+                        reject(error);
+                    }); 
+                }, 1000);    
+            });
+                
         })
         .catch((error)=>{
             console.error(error);
         });
         
-        setTimeout(()=> {
-           let lmode = this.Motors.off & 0x07;
-            let lpower = 200 & 0xFF;
-            let rmode = this.Motors.off & 0x07;
-            let rpower = 200 & 0xFF;
-            
-            let data = new Uint8Array([lmode, lpower, rmode, rpower]);
-
-            this._sendCommand(did, cid, data).then(() => {
-                this.busy = false;
-            })
-            .catch((error)=>{
-                console.error(error);
-            }); 
-        }, 1000);
+        
         
     }
 
@@ -198,6 +230,18 @@ class Ollie {
     onDisconnected() {
         console.log('Device is disconnected.');
     }
+    
+    _intToHexArray(value, numBytes) {
+        var hexArray = new Array(numBytes);
+
+        for (var i = numBytes - 1; i >= 0; i--) {
+            hexArray[i] = value & 0xFF;
+            value >>= 8;
+        }
+
+        return hexArray;
+     };
+
 
     _sendCommand(did, cid, data) {
         // Create client command packets
@@ -225,8 +269,9 @@ class Ollie {
         array.set(packets, 0);
         array.set(data, packets.byteLength);
         array.set(checksum, packets.byteLength + data.byteLength);
-        return this._writeCharacteristic(this.config.robotService(), this.config.controlCharacteristic(), array).then(()=>{
-            console.log('Command write done.');  
+        return this._writeCharacteristic(this.config.robotService(), this.config.controlCharacteristic(), array).then((returnData)=>{
+            console.log('Command write done. : %s',returnData);  
+            return Promise.resolve();
         });          
     }
 
