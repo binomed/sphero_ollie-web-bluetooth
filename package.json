@@ -1,6 +1,6 @@
 {
   "author": "JefBinomed",
-  "name": "Mbot-WebBluetooth",
+  "name": "Ollie-WebBluetooth",
   "version": "1.0.0",
   "dependencies": {
     "angular": "^1.4.9",
