@@ -80,9 +80,20 @@
                         </div>
 
                         <div class="mdl-tabs__panel is-active" id="control-panel">
-                            <div class="panel-flex">
-                                <h2 class="mdl-card__title-text">Move your Ollie</h2>
-                                <div class="part-button">
+                            <div class="panel-flex">                                
+                                <h2 class="mdl-card__title-text">Choose the way to move your Ollie</h2>		                                 
+                                 <div class="row">		 
+                                      <label for="switchParts" class="mdl-switch mdl-js-switch">		
+                                         <input type="checkbox" checked id="switchParts" class="mdl-switch__input">		
+                                         <span class="mdl-switch__label">Buttons / Joystick</span>		
+                                     </label>		
+                                 </div>		
+                                 <div class="part-joystick">		
+                                     <div class="row">		
+                                         <div id="joystick"></div>		
+                                     </div>		
+                                 </div>		
+                                 <div class="part-button" style="display:none">
                                     <div class="row">
                                         <div class="flex20"></div>
                                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnUp">
@@ -159,6 +170,7 @@
         </div>
     </div>
     <script src="./bundle.js"></script>
+    <script src="./libs/nipplejs.js"></script>
 </body>
 
 </html>
