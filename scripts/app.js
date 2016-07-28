@@ -62,6 +62,9 @@
                         document.getElementById('btnTrick3').addEventListener('click', _=>{ 
                             ollie.processSpin(ollie.Motors.forward, ollie.Motors.forward)
                         });
+                        document.getElementById('btnTrick4').addEventListener('click', _=>{ 
+                            ollie.processSpin(ollie.Motors.reverse, ollie.Motors.reverse)
+                        });
 
                         // Color the robot
                         let ColorPicker = require('./components/colorpicker.js');

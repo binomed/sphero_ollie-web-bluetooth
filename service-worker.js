@@ -1,7 +1,7 @@
 'use strict';
 
-let cacheFileName = "mBotCache-v3";
-let cacheCdnName = "mBotCdnCache-v1";
+let cacheFileName = "ollieCache-v1";
+let cacheCdnName = "ollieCdnCache-v1";
 
 let filesToCache = [
     './',
