@@ -76,7 +76,7 @@
                         <div class="mdl-tabs__tab-bar">
                             <a href="#control-panel" class="mdl-tabs__tab is-active">Controls</a>
                             <a href="#color-panel" class="mdl-tabs__tab">Color</a>
-                            <a href="#sound-panel" class="mdl-tabs__tab">Sound</a>
+                            <a href="#tricks-panel" class="mdl-tabs__tab">Tricks</a>
                         </div>
 
                         <div class="mdl-tabs__panel is-active" id="control-panel">
@@ -112,16 +112,30 @@
                         <div class="mdl-tabs__panel" id="color-panel">
                             <div class="panel-flex">
                                 <h2 class="mdl-card__title-text">Choose the color to apply</h2>
-                                <canvas mbot-colorpicker="bleCtrl.changeColor(red,blue,green)"></canvas>
+                                <canvas ></canvas>
                             </div>
                         </div>
-                        <div class="mdl-tabs__panel" id="sound-panel">
+                        <div class="mdl-tabs__panel" id="tricks-panel">
                             <div class="panel-flex">
-                                <h2 class="mdl-card__title-text">Press the button to change the sound</h2>
+                                <h2 class="mdl-card__title-text">Choose your tricks</h2>
                                 <div class="row">
                                     <div class="flex20"></div>
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnBuzz">
-                                        Buzz
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnTrick1">
+                                        Forward - Reverse
+                                    </button>
+                                    <div class="flex20"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="flex20"></div>
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnTrick2">
+                                        Reverse - Forward
+                                    </button>
+                                    <div class="flex20"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="flex20"></div>
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnTrick3">
+                                        Forward - Forward
                                     </button>
                                     <div class="flex20"></div>
                                 </div>

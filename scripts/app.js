@@ -42,19 +42,26 @@
                         let btnLeft = document.getElementById('btnLeft');
                         let btnRight = document.getElementById('btnRight');
 
-                        btnUp.addEventListener('touchstart', _ => { ollie.processMotor(-250, 250) });
-                        btnDown.addEventListener('touchstart', _ => { ollie.processMotor(250, -250) });
-                        btnLeft.addEventListener('touchstart', _ => { ollie.processMotor(250, 250) });
-                        btnRight.addEventListener('touchstart', _ => { ollie.processMotor(-250, -250) });
+                        btnUp.addEventListener('touchstart', _ => { ollie.processMotor(0,50) });
+                        btnDown.addEventListener('touchstart', _ => { ollie.processMotor(180,50) });
+                        btnLeft.addEventListener('touchstart', _ => { ollie.processMotor(270,50) });
+                        btnRight.addEventListener('touchstart', _ => { ollie.processMotor(90,50) });
 
                         btnUp.addEventListener('touchend', _ => { ollie.processMotor(0, 0) });
-                        btnDown.addEventListener('touchend', _ => { ollie.processMotor(0, 0) });
-                        btnLeft.addEventListener('touchend', _ => { ollie.processMotor(0, 0) });
-                        btnRight.addEventListener('touchend', _ => { ollie.processMotor(0, 0) });
+                        btnDown.addEventListener('touchend', _ => { ollie.processMotor(180, 0) });
+                        btnLeft.addEventListener('touchend', _ => { ollie.processMotor(270, 0) });
+                        btnRight.addEventListener('touchend', _ => { ollie.processMotor(90, 0) });
                         
-                        // Buzz the robot
-                        let btnBuzz = document.getElementById('btnBuzz');
-                        btnBuzz.addEventListener('click', _=>{ ollie.processBuzzer()});
+                        // Tricks with the robot
+                        document.getElementById('btnTrick1').addEventListener('click', _=>{ 
+                            ollie.processSpin(ollie.Motors.forward, ollie.Motors.reverse)
+                        });
+                        document.getElementById('btnTrick2').addEventListener('click', _=>{ 
+                            ollie.processSpin(ollie.Motors.reverse, ollie.Motors.forward)
+                        });
+                        document.getElementById('btnTrick3').addEventListener('click', _=>{ 
+                            ollie.processSpin(ollie.Motors.forward, ollie.Motors.forward)
+                        });
 
                         // Color the robot
                         let ColorPicker = require('./components/colorpicker.js');

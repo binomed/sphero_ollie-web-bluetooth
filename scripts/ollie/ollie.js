@@ -29,6 +29,13 @@ class Ollie {
         this.buzzerIndex = 0;
         this.sequence = 0;
         this.busy = false;
+        this.Motors = {
+            off : 0x00,
+            forward : 0x01,
+            reverse : 0x02,
+            brake : 0x03,
+            ignore : 0x04
+        }
     }
 
     /*
@@ -94,8 +101,26 @@ class Ollie {
     /**
      * Control the motors of robot
     */
-    processMotor(valueM1, valueM2) {
-        return Pomise.resolve();
+    processMotor(heading, power) {
+        console.log('Roll heading='+heading);
+        if (this.busy) {
+            // Return if another operation pending
+            return Promise.resolve();
+        }
+        this.busy = true;
+        let did = 0x02; // Virtual device ID
+        let cid = 0x30; // Roll command
+        // Roll command data: speed, heading (MSB), heading (LSB), state
+        let data = new Uint8Array([power, heading >> 8, heading & 0xFF, 1]);
+
+        this._sendCommand(did, cid, data).then(() => {
+            this.busy = false;
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+        
+        
 
     }
 
@@ -114,7 +139,52 @@ class Ollie {
         this._sendCommand(did, cid, data).then(() => {
             this.busy = false;
         })
-        .catch(handleError);
+        .catch((error)=>{
+            console.error(error);
+        });
+    }
+    
+    processSpin(lmotor, rmotor){
+        console.log('Spin');
+        if (this.busy){
+            return Promise.resolve();
+        }
+        this.busy = true;
+        let did = 0x02; //Virtual device ID
+        let cid = 0x33; // Set raw Motors command
+        
+              
+        let lmode = lmotor & 0x07;
+        let lpower = 200 & 0xFF;
+        let rmode = rmotor & 0x07;
+        let rpower = 200 & 0xFF;
+        
+        let data = new Uint8Array([lmode, lpower, rmode, rpower]);
+
+        this._sendCommand(did, cid, data).then(() => {
+            this.busy = false;
+            console.log("send command")
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+        
+        setTimeout(()=> {
+           let lmode = this.Motors.off & 0x07;
+            let lpower = 200 & 0xFF;
+            let rmode = this.Motors.off & 0x07;
+            let rpower = 200 & 0xFF;
+            
+            let data = new Uint8Array([lmode, lpower, rmode, rpower]);
+
+            this._sendCommand(did, cid, data).then(() => {
+                this.busy = false;
+            })
+            .catch((error)=>{
+                console.error(error);
+            }); 
+        }, 1000);
+        
     }
 
     disconnect() {
