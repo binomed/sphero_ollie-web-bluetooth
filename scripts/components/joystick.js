@@ -9,7 +9,7 @@ class Joystick {
                 top: '50%'
             },
             size: 200,
-            color: '#f44336'
+            color: '#c10435'
         });
         this.callback = callback;
 

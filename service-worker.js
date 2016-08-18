@@ -7,16 +7,18 @@ let filesToCache = [
     './',
     './index.html',
     './bundle.js',
+    './node_modules/nipplejs/dist/nipplejs.min.js',
     './css/app.css',
     './assets/images/color-wheel.png',
+    './assets/images/icon_header_128.png',
     './assets/images/logo.png',
     './assets/images/logo_128.png',
     './assets/images/logo_144.png',
     './assets/images/logo_152.png',
     './assets/images/logo_192.png',
     './assets/images/logo_256.png',
-    './assets/images/mbot_connect.jpg',
-    './assets/images/mbot_face.jpg',
+    './assets/images/ollie_connect.jpg',
+    './assets/images/ollie_crash.jpg',
     './manifest.json'
 ];
 
