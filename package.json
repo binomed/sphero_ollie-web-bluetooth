@@ -3,12 +3,7 @@
   "name": "Ollie-WebBluetooth",
   "version": "1.0.0",
   "dependencies": {
-    "angular": "^1.4.9",
-    "angular-animate": "^1.4.9",
-    "angular-aria": "^1.4.9",
-    "angular-material": "^1.0.2",
-    "font-awesome": "^4.5.0",
-    "nipplejs": "^0.6.3"
+    "nipplejs": "^0.6.5"
   },
   "devDependencies": {
     "browser-sync": "^2.6.9",
