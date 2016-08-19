@@ -1,0 +1,119 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "nipplejs@^0.6.5",
+        "scope": null,
+        "escapedName": "nipplejs",
+        "name": "nipplejs",
+        "rawSpec": "^0.6.5",
+        "spec": ">=0.6.5 <0.7.0",
+        "type": "range"
+      },
+      "C:\\projects\\sphero_ollie-web-bluetooth"
+    ]
+  ],
+  "_from": "nipplejs@>=0.6.5 <0.7.0",
+  "_id": "nipplejs@0.6.5",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/nipplejs",
+  "_nodeVersion": "6.2.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/nipplejs-0.6.5.tgz_1471271782140_0.8712030027527362"
+  },
+  "_npmUser": {
+    "name": "yoannmoinet",
+    "email": "yo@nnmoi.net"
+  },
+  "_npmVersion": "3.8.9",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "nipplejs@^0.6.5",
+    "scope": null,
+    "escapedName": "nipplejs",
+    "name": "nipplejs",
+    "rawSpec": "^0.6.5",
+    "spec": ">=0.6.5 <0.7.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/nipplejs/-/nipplejs-0.6.5.tgz",
+  "_shasum": "e4a93bb253b22c3205ad7332410e6cf8174ff212",
+  "_shrinkwrap": null,
+  "_spec": "nipplejs@^0.6.5",
+  "_where": "C:\\projects\\sphero_ollie-web-bluetooth",
+  "author": {
+    "name": "Yoann Moinet",
+    "email": "yoann.moinet@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/yoannmoinet/nipplejs/issues"
+  },
+  "dependencies": {},
+  "description": "A virtual joystick for touch capable interfaces",
+  "devDependencies": {
+    "casperjs": "github:yoannmoinet/casperjs#a45c64d",
+    "concat-cli": "github:yoannmoinet/concat-cli",
+    "conventional-changelog": "1.1.0",
+    "eslint": "^1.1.0",
+    "expect.js": "^0.3.1",
+    "jscs": "^2.1.0",
+    "markdown-toc": "^0.12.12",
+    "mocha": "^2.2.5",
+    "node-static": "^0.7.7",
+    "phantomjs": "github:yoannmoinet/phantomjs#nick-2",
+    "uglify-js": "^2.4.24",
+    "umd": "^3.0.1",
+    "watch": "^0.16.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "e4a93bb253b22c3205ad7332410e6cf8174ff212",
+    "tarball": "https://registry.npmjs.org/nipplejs/-/nipplejs-0.6.5.tgz"
+  },
+  "gitHead": "a6a01d6c5489cd5e48f99ce8ecc8626e579e76c8",
+  "homepage": "https://github.com/yoannmoinet/nipplejs",
+  "license": "MIT",
+  "main": "./dist/nipplejs.js",
+  "maintainers": [
+    {
+      "name": "yoannmoinet",
+      "email": "yo@nnmoi.net"
+    }
+  ],
+  "name": "nipplejs",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoannmoinet/nipplejs.git"
+  },
+  "scripts": {
+    "bowerSync": "node ./bin/bowerSync.js",
+    "build": "npm run buildWatch && npm run uglify",
+    "buildWatch": "npm run concat && npm run umd",
+    "changelog": "node ./bin/changelog.js",
+    "clean": "node ./bin/clean.js",
+    "concat": "concat-cli -f ./src/start.js ./src/utils.js ./src/super.js ./src/nipple.js ./src/collection.js ./src/manager.js ./src/end.js -o ./nipplejs.temp.js",
+    "copyGh": "node ./bin/copyToGhPages.js",
+    "copyToTest": "node ./bin/copyToTest.js",
+    "format": "jscs ./src/start.js ./src/utils.js ./src/super.js ./src/manager.js ./src/nipple.js ./src/end.js ./test/nipplejs.casper.js",
+    "formatAndLint": "npm run format && npm run lint",
+    "lint": "eslint ./src/start.js ./src/utils.js ./src/super.js ./src/manager.js ./src/nipple.js ./src/end.js ./test/nipplejs.casper.js",
+    "postbuildWatch": "npm run clean && npm run copyToTest",
+    "postversion": "npm run bowerSync && npm run changelog",
+    "prebuild": "npm run formatAndLint",
+    "pretest": "npm run build",
+    "start": "static test",
+    "test": "casperjs test ./test/nipplejs.casper.js",
+    "toc": "markdown-toc -i README.md",
+    "uglify": "uglifyjs ./dist/nipplejs.js -o ./dist/nipplejs.min.js -c -m",
+    "umd": "umd nipplejs ./nipplejs.temp.js ./dist/nipplejs.js",
+    "watch": "watch \"npm run buildWatch\" src"
+  },
+  "version": "0.6.5"
+}
