@@ -6,6 +6,8 @@
     <title>Sphero Ollie WebBluetooth</title>
     <link rel="stylesheet" type="text/css" href="css/app.css">
     <link rel="manifest" href="manifest.json">
+    <!-- Origin Trial Token, feature = Web Bluetooth, origin = https://jef.binomed.fr, expires = 2016-09-08 -->
+    <meta http-equiv="origin-trial" content="ApUk+AbzaanX2prO4G8VtoxP9/VPc4Y9CW7cTDvtbnY1f+PK3ueNgFu3odrM/hu/bJjEFlIseOANrFwH1CTyRggAAABZeyJvcmlnaW4iOiAiaHR0cHM6Ly9qZWYuYmlub21lZC5mcjo0NDMiLCAiZmVhdHVyZSI6ICJXZWJCbHVldG9vdGgiLCAiZXhwaXJ5IjogMTQ3MzM0ODIwNH0=" />
     <!--<meta name="HandheldFriendly" content="true" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -21,11 +23,11 @@
 <body>
     <!-- Always shows a header, even in smaller screens. -->
 
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div id="main-content" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <!-- Title -->
-                <img src="./assets/images/logo_128.png">
+                <img src="./assets/images/icon_header_128.png">
                 <span class="mdl-layout-title">Ollie Application</span>
 
             </div>
@@ -95,25 +97,25 @@
                                  </div>		
                                  <div class="part-button" style="display:none">
                                     <div class="row">
-                                        <div class="flex20"></div>
-                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnUp">
-                                            Up
+                                        <div class="flex30"></div>
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" id="btnUp">
+                                            <i class="material-icons">keyboard_arrow_up</i>
                                         </button>
                                         <div class="flex20"></div>
                                     </div>
                                     <div class="row">
                                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" id="btnLeft">
-                                            Left
+                                            <i class="material-icons">keyboard_arrow_left</i>  
                                         </button>
                                         <div class="flex20"></div>
                                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" id="btnRight">
-                                            Right
+                                             <i class="material-icons">keyboard_arrow_right</i>
                                         </button>
                                     </div>
                                     <div class="row">
-                                        <div class="flex20"></div>
-                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnDown">
-                                            Down
+                                        <div class="flex30"></div>
+                                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex40" id="btnDown">
+                                              <i class="material-icons">keyboard_arrow_down</i>
                                         </button>
                                         <div class="flex20"></div>
                                     </div>
@@ -132,28 +134,28 @@
                                 <div class="row">
                                     <div class="flex20"></div>
                                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnTrick1">
-                                        Spin Right
+                                        Spin Right <i class="material-icons">rotate_right</i>
                                     </button>
                                     <div class="flex20"></div>
                                 </div>
                                 <div class="row">
                                     <div class="flex20"></div>
                                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnTrick2">
-                                        Spin Left
+                                        Spin Left <i class="material-icons">rotate_left</i>
                                     </button>
                                     <div class="flex20"></div>
                                 </div>
                                 <div class="row">
                                     <div class="flex20"></div>
                                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnTrick3">
-                                        Jump Forward
+                                        Jump Forward <i class="material-icons">trending_up</i>
                                     </button>
                                     <div class="flex20"></div>
                                 </div>
                                 <div class="row">
                                     <div class="flex20"></div>
                                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect flex60" id="btnTrick4">
-                                        Jump Backward
+                                        Jump Backward <i class="material-icons">trending_down</i>
                                     </button>
                                     <div class="flex20"></div>
                                 </div>
