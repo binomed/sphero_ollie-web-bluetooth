@@ -3,7 +3,7 @@ Simple application to control the Sphero Ollie with web bluetooth
 
 # Demo
 
-You can test the application here : https://jef.binomed.fr/sphero_ollie-webbluetooth
+You can test the application here : https://jef.binomed.fr/sphero_ollie-web-bluetooth/
 
 # What you can do ?
 
