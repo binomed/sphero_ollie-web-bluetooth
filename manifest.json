@@ -24,7 +24,7 @@
             "sizes": "256x256"
         }
     ],
-    "start_url": "/index.html",
+    "start_url": "sphero_ollie-web-bluetooth/index.html",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#323232",

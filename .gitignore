@@ -38,3 +38,5 @@ jspm_packages
 
 # Nodes module
 node_modules/
+
+yarn.lock
