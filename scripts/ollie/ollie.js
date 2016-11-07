@@ -127,10 +127,11 @@ class Ollie {
      * Control the motors of robot
     */
     processMotor(heading, power) {
-        console.log('Roll heading='+heading);
+        console.log(`Roll heading=${heading}, power=${power}`);
         if (this.busy) {
+            console.warn('ollie is busy');
             // Return if another operation pending
-            return Promise.resolve();
+            return Promise.reject();
         }
         this.busy = true;
         let did = 0x02; // Virtual device ID
@@ -139,10 +140,12 @@ class Ollie {
         let data = new Uint8Array([power, heading >> 8, heading & 0xFF, 1]);
 
         return this._sendCommand(did, cid, data).then(() => {
+            console.info(`busy : ${this.busy}`);
             this.busy = false;
             return Promise.resolve();
         })
         .catch((error)=>{
+            this.busy = false;
             console.error(error);
         });
         
@@ -153,8 +156,9 @@ class Ollie {
     processColor(red,blue,green){
         console.log('Set color: r='+red+',g='+green+',b='+blue);
         if (this.busy) {
+            console.warn('ollie is busy');
             // Return if another operation pending
-            return Promise.resolve();
+            return Promise.reject();
         }
         this.busy = true;
         let did = 0x02; // Virtual device ID
@@ -168,6 +172,7 @@ class Ollie {
             return Promise.resolve();
         })
         .catch((error)=>{
+            this.busy = false;
             console.error(error);
         });
     }
@@ -175,7 +180,8 @@ class Ollie {
     processSpin(lmotor, rmotor){
         console.log('Spin');
         if (this.busy){
-            return Promise.resolve();
+            console.warn('ollie is busy');
+            return Promise.reject();
         }
         this.busy = true;
         let did = 0x02; //Virtual device ID
@@ -190,12 +196,12 @@ class Ollie {
         let data = new Uint8Array([lmode, lpower, rmode, rpower]);
 
         return this._sendCommand(did, cid, data).then(() => {
-            return new Promise(function(resolve, reject){
+            return new Promise((resolve, reject)=>{
                 setTimeout(()=> {
                     let lmode = this.Motors.off & 0x07;
-                    let lpower = 200 & 0xFF;
+                    let lpower = 200;
                     let rmode = this.Motors.off & 0x07;
-                    let rpower = 200 & 0xFF;
+                    let rpower = 200;
                     
                     let data = new Uint8Array([lmode, lpower, rmode, rpower]);
 
@@ -204,10 +210,11 @@ class Ollie {
                         resolve();
                     })
                     .catch((error)=>{
+                        this.busy = false;
                         console.error(error);
                         reject(error);
                     }); 
-                }, 1000);    
+                }, 2000);    
             });
                 
         })
@@ -269,10 +276,7 @@ class Ollie {
         array.set(packets, 0);
         array.set(data, packets.byteLength);
         array.set(checksum, packets.byteLength + data.byteLength);
-        return this._writeCharacteristic(this.config.robotService(), this.config.controlCharacteristic(), array).then((returnData)=>{
-            console.log('Command write done. : %s',returnData);  
-            return Promise.resolve();
-        });          
+        return this._writeCharacteristic(this.config.robotService(), this.config.controlCharacteristic(), array);          
     }
 
 
