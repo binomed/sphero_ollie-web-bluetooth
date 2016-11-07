@@ -1,6 +1,6 @@
 'use strict';
 
-let cacheFileName = "ollieCache-v2";
+let cacheFileName = "ollieCache-v3";
 let cacheCdnName = "ollieCdnCache-v1";
 
 let filesToCache = [
