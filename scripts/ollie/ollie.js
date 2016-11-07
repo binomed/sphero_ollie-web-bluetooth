@@ -128,7 +128,7 @@ class Ollie {
     */
     processMotor(heading, power) {
         console.log(`Roll heading=${heading}, power=${power}`);
-        if (this.busy) {
+        if (this.busy && power > 0) {
             console.warn('ollie is busy');
             // Return if another operation pending
             return Promise.reject();
@@ -139,26 +139,27 @@ class Ollie {
         // Roll command data: speed, heading (MSB), heading (LSB), state
         let data = new Uint8Array([power, heading >> 8, heading & 0xFF, 1]);
 
-        return this._sendCommand(did, cid, data).then(() => {
-            console.info(`busy : ${this.busy}`);
-            this.busy = false;
-            return Promise.resolve();
+        return this._sendCommand(did, cid, data)
+        .then(_ => {
+            console.log('processMotor success');
         })
-        .catch((error)=>{
+        .catch(error => {
+            console.error('processMotor fail', error);
+            if (power === 0){
+                this.processMotor(heading, motor);
+            }
+        })
+       .then(_ => {
             this.busy = false;
-            console.error(error);
         });
-        
-        
-
     }
 
     processColor(red,blue,green){
         console.log('Set color: r='+red+',g='+green+',b='+blue);
         if (this.busy) {
-            console.warn('ollie is busy');
+            console.log('ollie is busy');
             // Return if another operation pending
-            return Promise.reject();
+            Promise.reject();
         }
         this.busy = true;
         let did = 0x02; // Virtual device ID
@@ -168,12 +169,12 @@ class Ollie {
 
         return this._sendCommand(did, cid, data).then(() => {
             console.log("color set ! ");
-            this.busy = false;
-            return Promise.resolve();
         })
         .catch((error)=>{
+            console.error('processColor fail',error);
+        })
+        .then(_=>{
             this.busy = false;
-            console.error(error);
         });
     }
     
@@ -196,6 +197,7 @@ class Ollie {
         let data = new Uint8Array([lmode, lpower, rmode, rpower]);
 
         return this._sendCommand(did, cid, data).then(() => {
+            console.log('first command spin sucess!');
             return new Promise((resolve, reject)=>{
                 setTimeout(()=> {
                     let lmode = this.Motors.off & 0x07;
@@ -205,13 +207,13 @@ class Ollie {
                     
                     let data = new Uint8Array([lmode, lpower, rmode, rpower]);
 
-                    this._sendCommand(did, cid, data).then(() => {
-                        this.busy = false;
+                    this._sendCommand(did, cid, data)
+                    .then(_ => {     
+                        console.log('second command sucess');                   
                         resolve();
                     })
                     .catch((error)=>{
-                        this.busy = false;
-                        console.error(error);
+                        console.error('second command fail',error);
                         reject(error);
                     }); 
                 }, 2000);    
@@ -220,6 +222,9 @@ class Ollie {
         })
         .catch((error)=>{
             console.error(error);
+        })
+        .then(_=>{
+            this.busy = false;
         });
         
         
